@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" style="width: 100%; height: 100%">
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="/Styles.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body style="width: 100%; height: 100%">
+<div class="container-fluid">
+    <div class="header-buttons">
+        <a href="/">
+            <button class="btn btn-warning">
+                Main screen
+            </button>
+        </a>
+        <a  th:href="logout">
+            <button class="btn btn-dark">
+                Logout
+            </button>
+        </a>
+    </div>
+    <div class="main-div">
+
+        <div class="container">
+            <div class="row">
+                <div class="alert text-danger" th:text="${errors}"></div>
+            </div>
+            <form action="#" th:object="${request}" th:action="@{/createRequest}" method="post">
+                <div class="form-group col-md-12 w-50">
+                    <div th:text="${'Remaining booking days: ' + request.remainingDays}"></div>
+                    <mat-label for="fromDate">From</mat-label>
+                    <input th:field="*{fromDate}" type="date"
+                           th:value="${request.fromDate}"
+                           th:attr="min=${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"
+                           class="form-control"
+                           th:id="fromDate" required
+                           name=fromDate>
+                </div>
+
+                <div class="form-group col-md-12 w-50">
+                    <mat-label for="toDate">To</mat-label>
+                    <input th:field="*{toDate}" type="date"
+                           th:attr="min=${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"
+                           class="form-control" id="toDate" required
+                           name="toDate">
+                </div>
+
+                <div class="form-group col-md-6 form-inline">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a href="/">
+                        <button type="button" class="btn btn-secondary">Cancel</button>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

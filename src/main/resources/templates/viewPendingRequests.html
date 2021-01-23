@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" style="width: 100%; height: 100%">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/Styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body style="width: 100%; height: 100%">
+<div class="container-fluid">
+
+    <div class="header-buttons">
+        <a href="/">
+            <button class="btn btn-warning">
+                Main screen
+            </button>
+        </a>
+        <a th:href="logout">
+            <button class="btn btn-dark">
+                Logout
+            </button>
+        </a>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <th>Employee Email</th>
+        <th>From date</th>
+        <th>To date</th>
+        <th>Number of days</th>
+        <th>Current request state</th>
+        <th></th>
+        <th></th>
+        </thead>
+        <tbody>
+        <tr th:each="request : ${requests}">
+            <td th:text="${request.getEmployee().getEmail()}"></td>
+            <td th:text="${request.getFromDate()}"></td>
+            <td th:text="${request.getToDate()}"></td>
+            <td th:text="${request.getNumberOfDays()}"></td>
+            <td th:class="${request.getState().getStateName()}" th:text="${request.getState().getStateName()}"></td>
+
+            <td>
+                <form action="#" th:action="@{|/approve/${request.getRequestId()}|}" th:method="post">
+                    <button type="submit" class="btn btn-success">Approve</button>
+                </form>
+            </td>
+
+            <td>
+                <form action="#" th:action="@{|/decline/${request.getRequestId()}|}"  th:method="post">
+                    <button type="submit" class="btn btn-danger">Decline</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" style="width: 100%; height: 100%">
+<head>
+    <meta charset="UTF-8">
+    <title>Thymeleaf</title>
+    <link rel="stylesheet" type="text/css" href="/Styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body style="width: 100%; height: 100%">
+<div class="container-fluid">
+    <div class="header-buttons">
+        <a  th:href="logout">
+            <button class="btn btn-dark">
+                Logout
+            </button>
+        </a>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="h2 m-5">
+               Welcome..
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <a class="make-request-btn" th:href="@{createRequest}">
+                    <button class="btn btn-primary">Make a Request</button>
+                </a>
+            </div>
+            <div class="col-4" th:if="${role != 'ROLE_Employee'}">
+                <a th:href="pendingRequests">
+                    <button class="btn btn-primary">View pending requests</button>
+                </a>
+            </div>
+            <div class="col-4">
+                <a th:href="personalRequests">
+                    <button class="btn btn-primary">View your requests</button>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
